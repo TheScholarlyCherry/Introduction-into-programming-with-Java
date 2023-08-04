@@ -1,0 +1,14 @@
+package cps161_FinalProject;
+public abstract class FunkyToken {
+    private char token;
+
+    public FunkyToken(char token) {
+        this.token = token;
+    }
+
+    public char getToken() {
+        return token;
+    }
+
+    public abstract void move(FunkyBoard board);
+}

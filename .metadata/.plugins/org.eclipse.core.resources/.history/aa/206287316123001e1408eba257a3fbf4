@@ -1,0 +1,25 @@
+package cps161_LU9;
+
+import java.time.LocalDate;
+
+public class EmployeeDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Employee employee = new Employee("Brandon", LocalDate.now());
+		
+		System.out.println(employee);
+		
+		HourlyEmployee hourlyE = new HourlyEmployee("YEEEEEESH", LocalDate.of(2022, 1, 1), 80, 30);
+		
+		System.out.println(hourlyE);
+		hourlyE.displayPay();
+		
+		SalaryEmployee SalaryEmployee = new SalaryEmployee("OogaOogga", LocalDate.of(2022, 5, 1), 80_000);
+		System.out.println(SalaryEmployee);
+		
+		
+
+	}
+
+}

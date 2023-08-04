@@ -1,0 +1,79 @@
+package cps161_FinalProject;
+
+public class FunkyBoard {
+    private char[][] board;
+    private int boardSize;
+    private FunkyToken[] tokens;
+
+    public FunkyBoard(int size) {
+        boardSize = size;
+        board = new char[boardSize][boardSize];
+        tokens = new FunkyToken[3];
+    }
+
+    public int getBoardSize() {
+        return boardSize;
+    }
+
+    public void placeToken(FunkyToken token, int x, int y) {
+        if (x >= 0 && x < boardSize && y >= 0 && y < boardSize && board[x][y] == 0) {
+            token.setActive(true);
+            tokens[0] = token;
+            board[x][y] = token.getToken();
+        }
+    }
+
+    public void moveToken(FunkyToken token, int currentX, int currentY, int newX, int newY) {
+        if (currentX >= 0 && currentX < boardSize && currentY >= 0 && currentY < boardSize &&
+            newX >= 0 && newX < boardSize && newY >= 0 && newY < boardSize && board[currentX][currentY] == token.getToken()) {
+            board[currentX][currentY] = 0;
+            if (board[newX][newY] == 0) {
+                board[newX][newY] = token.getToken();
+            } else {
+                for (FunkyToken t : tokens) {
+                    if (t != null && t.getToken() == board[newX][newY]) {
+                        t.setActive(false);
+                        break;
+                    }
+                }
+                board[newX][newY] = token.getToken();
+            }
+        }
+    }
+
+    public FunkyToken getWinner() {
+        int activeTokens = 0;
+        FunkyToken winner = null;
+
+        for (FunkyToken token : tokens) {
+            if (token != null && token.isActive()) {
+                activeTokens++;
+                winner = token;
+            }
+        }
+
+        if (activeTokens == 1) {
+            return winner;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean isCellEmpty(int x, int y) {
+        if (x >= 0 && x < boardSize && y >= 0 && y < boardSize) {
+            return board[x][y] == 0;
+        }
+        return false;
+    }
+
+    public void displayBoard() {
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                char token = board[i][j];
+                System.out.print(token == 0 ? "- " : token + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+}

@@ -1,0 +1,17 @@
+package cps161_FinalProject;
+public class MoveOneToken extends FunkyToken {
+
+    public MoveOneToken(char token) {
+        super(token);
+    }
+
+    @Override
+    public void move(FunkyBoard board) {
+        int newX = getStartX() + 1; // Move one step right
+        int newY = getStartY();
+
+        if (!board.moveToken(this, newX, newY)) {
+            setActive(false); // Lose if cannot move
+        }
+    }
+}

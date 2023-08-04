@@ -1,0 +1,26 @@
+package cps161_FinalProject;
+
+import java.util.Random;
+
+public class RandomToken extends FunkyToken {
+    public RandomToken(char token) {
+        super(token);
+    }
+
+    @Override
+    public void move(FunkyBoard board) {
+        Random random = new Random();
+        int boardSize = board.getBoardSize();
+        int x, y;
+
+        while (true) {
+            x = random.nextInt(boardSize);
+            y = random.nextInt(boardSize);
+
+            if (board.isCellEmpty(x, y)) {
+                board.placeToken(this, x, y);
+                break;
+            }
+        }
+    }
+}

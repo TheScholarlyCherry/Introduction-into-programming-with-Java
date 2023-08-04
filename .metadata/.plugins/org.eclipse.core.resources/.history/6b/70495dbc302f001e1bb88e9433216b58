@@ -1,0 +1,11 @@
+package cps161_FinalProject;
+public class MoveOneToken extends FunkyToken {
+    public MoveOneToken(char token) {
+        super(token);
+    }
+
+    @Override
+    public void move(FunkyBoard board) {
+        // Implement the move logic for MoveOneToken
+    }
+}

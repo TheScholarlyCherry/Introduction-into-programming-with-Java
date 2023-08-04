@@ -1,0 +1,31 @@
+package cps161_FinalProject;
+public abstract class FunkyToken {
+    private char token;
+    private boolean active;
+
+    public FunkyToken(char token) {
+        this.token = token;
+        this.active = true;
+    }
+
+    public char getToken() {
+        return token;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public abstract void move(FunkyBoard board);
+
+    public void claimSpot(FunkyBoard board, int x, int y) {
+        char currentToken = board.getTokenAt(x, y);
+        if (currentToken == '-' || currentToken == token) {
+            board.setTokenAt(x, y, token);
+        }
+    }
+}

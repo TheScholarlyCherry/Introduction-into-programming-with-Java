@@ -1,0 +1,10 @@
+package loxosceles0001;
+
+public class Battle {
+	
+boolean enemy = false;
+	
+	if (enemy = true) {
+		
+	}
+}

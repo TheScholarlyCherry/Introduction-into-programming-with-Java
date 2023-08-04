@@ -1,0 +1,51 @@
+package cps161_FinalProject;
+public abstract class FunkyToken {
+    private char token;
+
+    public FunkyToken(char token) {
+        this.token = token;
+    }
+
+    public char getToken() {
+        return token;
+    }
+
+    public abstract void move(FunkyBoard board);
+
+    public void placeToken(FunkyBoard board, int x, int y) {
+        if (board.getTokenAt(x, y) == '-') {
+            board.setTokenAt(x, y, this.token);
+        } else if (board.getTokenAt(x, y) != this.token) {
+            board.setTokenAt(x, y, this.token);
+            int currentX = getTokenXPosition(board);
+            int currentY = getTokenYPosition(board);
+            board.setTokenAt(currentX, currentY, this.token);
+        }
+    }
+
+    public int getTokenXPosition(FunkyBoard board) {
+        for (int i = 0; i < board.getBoardSize(); i++) {
+            for (int j = 0; j < board.getBoardSize(); j++) {
+                if (board.getTokenAt(i, j) == this.token) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public int getTokenYPosition(FunkyBoard board) {
+        for (int i = 0; i < board.getBoardSize(); i++) {
+            for (int j = 0; j < board.getBoardSize(); j++) {
+                if (board.getTokenAt(i, j) == this.token) {
+                    return j;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public boolean isActive() {
+        return true; // Change this according to your game logic
+    }
+}

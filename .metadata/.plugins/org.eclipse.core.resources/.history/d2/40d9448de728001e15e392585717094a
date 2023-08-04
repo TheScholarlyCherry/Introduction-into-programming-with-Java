@@ -1,0 +1,10 @@
+package cps161_LU10;
+
+public class GradeBookPractice {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

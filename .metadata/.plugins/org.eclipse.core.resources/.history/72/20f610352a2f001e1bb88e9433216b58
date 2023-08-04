@@ -1,0 +1,48 @@
+package cps161_FinalProject;
+import java.util.Random;
+
+public class MoveOneToken extends FunkyToken {
+    private int x;
+    private int y;
+
+    public MoveOneToken(char token) {
+        super(token);
+    }
+
+    @Override
+    public void move(FunkyBoard board) {
+        if (x == 0 && y == 0) {
+            Random random = new Random();
+            int boardSize = board.getBoardSize();
+            x = random.nextInt(boardSize);
+            y = random.nextInt(boardSize);
+        } else {
+            int newX = x;
+            int newY = y;
+
+            Random random = new Random();
+            int direction = random.nextInt(4); // 0: up, 1: down, 2: left, 3: right
+
+            switch (direction) {
+                case 0: // Up
+                    newX = Math.max(0, x - 1);
+                    break;
+                case 1: // Down
+                    newX = Math.min(board.getBoardSize() - 1, x + 1);
+                    break;
+                case 2: // Left
+                    newY = Math.max(0, y - 1);
+                    break;
+                case 3: // Right
+                    newY = Math.min(board.getBoardSize() - 1, y + 1);
+                    break;
+            }
+
+            if (board.isCellEmpty(newX, newY)) {
+                board.placeToken(this, newX, newY);
+                x = newX;
+                y = newY;
+            }
+        }
+    }
+}

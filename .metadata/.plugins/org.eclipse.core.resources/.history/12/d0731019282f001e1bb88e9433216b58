@@ -1,0 +1,88 @@
+package cps161_FinalProject;
+import java.util.Arrays;
+
+public class FunkyBoard {
+    private char[][] board;
+    private int boardSize;
+
+    public FunkyBoard(int boardSize) {
+        this.boardSize = boardSize;
+        this.board = new char[boardSize][boardSize];
+        initializeTokens();
+    }
+
+    private void initializeTokens() {
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                board[i][j] = '-';
+            }
+        }
+    }
+
+    public void placeToken(FunkyToken token, int x, int y) {
+        board[x][y] = token.getToken();
+        token.setStartX(x);
+        token.setStartY(y);
+    }
+
+    public boolean moveToken(FunkyToken token, int x, int y) {
+        if (isCellEmpty(x, y)) {
+            int currentX = token.getStartX();
+            int currentY = token.getStartY();
+            board[currentX][currentY] = '-';
+            token.setStartX(x);
+            token.setStartY(y);
+            placeToken(token, x, y);
+            return true;
+        } else if (board[x][y] != token.getToken()) {
+            board[x][y] = token.getToken();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isCellEmpty(int x, int y) {
+        return board[x][y] == '-';
+    }
+
+    public FunkyToken getWinner() {
+        int countTokens = 0;
+        FunkyToken winner = null;
+
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                if (board[i][j] != '-') {
+                    if (winner == null) {
+                        winner = new FunkyToken(board[i][j]) {
+                            @Override
+                            public void move(FunkyBoard board) {
+                            }
+                        };
+                    }
+                    countTokens++;
+                }
+            }
+        }
+
+        if (countTokens <= 1) {
+            return winner;
+        }
+
+        return null;
+    }
+
+    public void displayBoard() {
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public int getBoardSize() {
+        return boardSize;
+    }
+}

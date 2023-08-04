@@ -1,0 +1,59 @@
+package cps161_FinalProject;
+import java.util.Arrays;
+
+public class FunkyBoard {
+    private int boardSize;
+    private char[][] board;
+
+    public FunkyBoard(int size) {
+        boardSize = size;
+        board = new char[size][size];
+        for (char[] row : board) {
+            Arrays.fill(row, '-');
+        }
+    }
+
+    public void displayBoard() {
+        for (char[] row : board) {
+            for (char token : row) {
+                System.out.print(token + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public char getTokenAt(int x, int y) {
+        if (x >= 0 && x < boardSize && y >= 0 && y < boardSize) {
+            return board[x][y];
+        }
+        return '-';
+    }
+
+    public void setTokenAt(int x, int y, char token) {
+        if (x >= 0 && x < boardSize && y >= 0 && y < boardSize) {
+            board[x][y] = token;
+        }
+    }
+
+    public void placeToken(FunkyToken token, int x, int y) {
+        if (x >= 0 && x < boardSize && y >= 0 && y < boardSize) {
+            char currentToken = board[x][y];
+            if (currentToken == '-' || currentToken == token.getToken()) {
+                board[x][y] = token.getToken();
+            }
+        }
+    }
+
+    public int getBoardSize() {
+        return boardSize;
+    }
+
+    public char[][] getBoard() {
+        return board;
+    }
+
+    public FunkyToken getWinner() {
+        // Logic to find the winner goes here
+        return null;
+    }
+}

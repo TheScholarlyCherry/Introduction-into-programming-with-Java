@@ -1,0 +1,44 @@
+package cps161_FinalProject;
+public class MoveOneToken extends FunkyToken {
+
+    public MoveOneToken(char token) {
+        super(token);
+    }
+
+    @Override
+    public void move(FunkyBoard board) {
+        if (!isActive()) {
+            return;
+        }
+
+        int x = getStartX();
+        int y = getStartY();
+
+        int newX, newY;
+        do {
+            int direction = (int) (Math.random() * 4);
+            newX = x;
+            newY = y;
+            switch (direction) {
+                case 0: // Up
+                    newX = Math.max(0, x - 1);
+                    break;
+                case 1: // Down
+                    newX = Math.min(board.getSize() - 1, x + 1);
+                    break;
+                case 2: // Left
+                    newY = Math.max(0, y - 1);
+                    break;
+                case 3: // Right
+                    newY = Math.min(board.getSize() - 1, y + 1);
+                    break;
+            }
+        } while (!board.isCellEmpty(newX, newY));
+
+        board.moveToken(this, x, y, newX, newY);
+
+        // Update the token's position
+        setStartX(newX);
+        setStartY(newY);
+    }
+}

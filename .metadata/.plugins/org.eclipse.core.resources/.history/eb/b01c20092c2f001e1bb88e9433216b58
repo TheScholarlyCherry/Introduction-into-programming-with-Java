@@ -1,0 +1,143 @@
+package cps161_FinalProject;
+
+import java.util.Random;
+
+public class FunkyBoard {
+    private char[][] board;
+    private Random random;
+
+    public FunkyBoard(int size) {
+        board = new char[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                board[i][j] = '-';
+            }
+        }
+        random = new Random();
+    }
+
+    public int getBoardSize() {
+        return board.length;
+    }
+
+    public void placeToken(FunkyToken token, int x, int y) {
+        board[x][y] = token.getToken();
+    }
+
+    public boolean isCellEmpty(int x, int y) {
+        return board[x][y] == '-';
+    }
+
+    public void moveToken(FunkyToken token) {
+        int x = token.getX();
+        int y = token.getY();
+        int size = getBoardSize();
+
+        int direction = random.nextInt(4); // 0: up, 1: down, 2: left, 3: right
+
+        if (direction == 0 && x > 0 && isCellEmpty(x - 1, y)) {
+            board[x][y] = '-';
+            x--;
+        } else if (direction == 1 && x < size - 1 && isCellEmpty(x + 1, y)) {
+            board[x][y] = '-';
+            x++;
+        } else if (direction == 2 && y > 0 && isCellEmpty(x, y - 1)) {
+            board[x][y] = '-';
+            y--;
+        } else if (direction == 3 && y < size - 1 && isCellEmpty(x, y + 1)) {
+            board[x][y] = '-';
+            y++;
+        }
+
+        if (isCellEmpty(x, y)) {
+            board[x][y] = token.getToken();
+        } else {
+            FunkyToken otherToken = new Random().nextBoolean() ? new MoveOneToken(board[x][y]) : new RandomToken(board[x][y]);
+            board[x][y] = token.getToken();
+            moveToken(otherToken);
+        }
+
+        token.setX(x);
+        token.setY(y);
+    }
+
+    public void displayBoard() {
+        for (int i = 0; i < getBoardSize(); i++) {
+            for (int j = 0; j < getBoardSize(); j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public FunkyToken getWinner() {
+        FunkyToken winner = null;
+        int size = getBoardSize();
+
+        // Check rows
+        for (int i = 0; i < size; i++) {
+            char firstToken = board[i][0];
+            boolean rowMatch = true;
+            for (int j = 1; j < size; j++) {
+                if (board[i][j] != firstToken) {
+                    rowMatch = false;
+                    break;
+                }
+            }
+            if (rowMatch && firstToken != '-') {
+                winner = firstToken == '@' ? new RandomToken(firstToken) : new MoveOneToken(firstToken);
+                break;
+            }
+        }
+
+        // Check columns
+        if (winner == null) {
+            for (int j = 0; j < size; j++) {
+                char firstToken = board[0][j];
+                boolean colMatch = true;
+                for (int i = 1; i < size; i++) {
+                    if (board[i][j] != firstToken) {
+                        colMatch = false;
+                        break;
+                    }
+                }
+                if (colMatch && firstToken != '-') {
+                    winner = firstToken == '@' ? new RandomToken(firstToken) : new MoveOneToken(firstToken);
+                    break;
+                }
+            }
+        }
+
+        // Check diagonals
+        if (winner == null) {
+            char firstToken = board[0][0];
+            boolean diagonalMatch = true;
+            for (int i = 1; i < size; i++) {
+                if (board[i][i] != firstToken) {
+                    diagonalMatch = false;
+                    break;
+                }
+            }
+            if (diagonalMatch && firstToken != '-') {
+                winner = firstToken == '@' ? new RandomToken(firstToken) : new MoveOneToken(firstToken);
+            }
+        }
+
+        if (winner == null) {
+            char firstToken = board[0][size - 1];
+            boolean diagonalMatch = true;
+            for (int i = 1; i < size; i++) {
+                if (board[i][size - 1 - i] != firstToken) {
+                    diagonalMatch = false;
+                    break;
+                }
+            }
+            if (diagonalMatch && firstToken != '-') {
+                winner = firstToken == '@' ? new RandomToken(firstToken) : new MoveOneToken(firstToken);
+            }
+        }
+
+        return winner;
+    }
+}

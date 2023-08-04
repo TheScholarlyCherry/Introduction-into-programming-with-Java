@@ -1,0 +1,46 @@
+package cps161_LU9;
+
+import java.time.LocalDate;
+
+public class HourlyEmployee extends Employee {
+	private int hoursWorked;
+	private int hourlyRate;
+	
+	public HourlyEmployee(String name, LocalDate dateHired, int hoursWorked, int hourlyRate) 
+	{
+		super(name, dateHired);
+		//setName(name);
+		//setDateHired(dateHired);
+		this.hoursWorked = hoursWorked;
+		this.hourlyRate = hourlyRate;
+	}
+	
+	public String toString() 
+	{
+		return "name: " + getName() + "Datehired: " + getDateHired() + " hoursWorked: " + hoursWorked + " hourlyRate: " + hourlyRate;
+	}
+	
+	public void displayPay() {
+		System.out.println("pay info: " + hourlyRate * hoursWorked);
+	}
+	
+	public int getHoursWorked() 
+	{
+		return hoursWorked;
+	}
+	public void setHoursWorked(int hoursWorked) 
+	{
+		this.hoursWorked = hoursWorked;
+	}
+	public int getHourlyRate() 
+	{
+		return hourlyRate;
+	}
+	public void setHourlyRate(int hourlyRate) 
+	{
+		this.hourlyRate = hourlyRate;
+	}
+	
+	
+
+}

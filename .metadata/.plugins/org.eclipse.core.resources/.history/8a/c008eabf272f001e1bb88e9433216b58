@@ -1,0 +1,35 @@
+package cps161_FinalProject;
+
+import java.util.Random;
+
+public abstract class FunkyToken {
+    protected char token;
+    protected int startX;
+    protected int startY;
+
+    public FunkyToken(char token) {
+        this.token = token;
+    }
+
+    public char getToken() {
+        return token;
+    }
+
+    public int getStartX() {
+        return startX;
+    }
+
+    public void setStartX(int x) {
+        this.startX = x;
+    }
+
+    public int getStartY() {
+        return startY;
+    }
+
+    public void setStartY(int y) {
+        this.startY = y;
+    }
+
+    public abstract void move(FunkyBoard board);
+}

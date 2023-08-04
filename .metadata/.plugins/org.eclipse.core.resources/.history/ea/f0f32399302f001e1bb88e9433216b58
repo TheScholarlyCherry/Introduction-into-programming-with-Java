@@ -1,0 +1,24 @@
+package cps161_FinalProject;
+
+public class MoveOneToken extends FunkyToken {
+    private int xChange;
+    private int yChange;
+
+    public MoveOneToken(char token, int xChange, int yChange) {
+        super(token);
+        this.xChange = xChange;
+        this.yChange = yChange;
+    }
+
+    @Override
+    public void move(FunkyBoard board) {
+        int x = board.getTokenXPosition(this);
+        int y = board.getTokenYPosition(this);
+        int newX = x + xChange;
+        int newY = y + yChange;
+
+        if (newX >= 0 && newX < board.getSize() && newY >= 0 && newY < board.getSize()) {
+            claimSpot(board, newX, newY);
+        }
+    }
+}

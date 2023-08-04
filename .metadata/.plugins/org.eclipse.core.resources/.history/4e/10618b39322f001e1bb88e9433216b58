@@ -1,0 +1,14 @@
+package cps161_FinalProject;
+public class RandomToken extends FunkyToken {
+
+    public RandomToken(char token) {
+        super(token);
+    }
+
+    @Override
+    public void move(FunkyBoard board) {
+        int[] newPosition = getRandomEmptySpot(board);
+        claimSpot(board, newPosition[0], newPosition[1]);
+    }
+}
+

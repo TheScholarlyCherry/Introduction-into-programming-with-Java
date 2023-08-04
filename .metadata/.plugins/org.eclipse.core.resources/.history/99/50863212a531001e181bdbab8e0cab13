@@ -1,0 +1,15 @@
+package loxosceles0001;
+
+public class CharacterLevel {
+	
+	public char EXP() {
+	double EXP = 0;
+	boolean battleWon = false;
+	
+	if battleWon = true{
+		for (double i = 0; i < 10; i++) {
+		double i = EXP;
+			}
+		}
+	}
+}

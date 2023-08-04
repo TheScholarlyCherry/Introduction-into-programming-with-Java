@@ -1,0 +1,76 @@
+package cps161_FinalProject;
+import java.util.Random;
+
+public class FunkyBoard {
+    private char[][] board;
+    private int boardSize;
+
+    public FunkyBoard(int size) {
+        boardSize = size;
+        board = new char[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                board[i][j] = '-';
+            }
+        }
+    }
+
+    public int getBoardSize() {
+        return boardSize;
+    }
+
+    public void displayBoard() {
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public char getTokenAt(int x, int y) {
+        return board[x][y];
+    }
+
+    public void setTokenAt(int x, int y, char token) {
+        board[x][y] = token;
+    }
+
+    public void placeToken(FunkyToken token, int x, int y) {
+        if (x >= 0 && x < boardSize && y >= 0 && y < boardSize) {
+            board[x][y] = token.getToken();
+        }
+    }
+
+    public void removeToken(int x, int y) {
+        if (x >= 0 && x < boardSize && y >= 0 && y < boardSize) {
+            board[x][y] = '-';
+        }
+    }
+
+    public FunkyToken getWinner() {
+        FunkyToken winner = null;
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                char token = board[i][j];
+                if (token != '-' && checkWinner(token)) {
+                    winner = new FunkyToken(token) {
+                    };
+                    break;
+                }
+            }
+            if (winner != null) {
+                break;
+            }
+        }
+        return winner;
+    }
+
+    private boolean checkWinner(char token) {
+        // Implement the logic to check for a winner
+        // (e.g., check rows, columns, and diagonals)
+        return false;
+    }
+}
+
