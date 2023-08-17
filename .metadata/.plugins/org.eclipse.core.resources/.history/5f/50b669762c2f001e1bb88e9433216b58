@@ -1,9 +1,0 @@
-package cps161_FinalProject;
-public interface FunkyToken {
-    char getToken();
-    void setX(int x);
-    void setY(int y);
-    int getX();
-    int getY();
-    void move(FunkyBoard board);
-}
