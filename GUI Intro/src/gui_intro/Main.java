@@ -11,6 +11,6 @@ public class Main {
 		JOptionPane.showMessageDialog(null, "You are " + age + " years old.");
 		
 		double height = Double.parseDouble(JOptionPane.showInputDialog("Enter your height: "));
-		JOptionPane.showMessageDialog(null, "You are " + height + " cm old.");
+		JOptionPane.showMessageDialog(null, "You are " + height + " cm tall.");
 	}
 }
